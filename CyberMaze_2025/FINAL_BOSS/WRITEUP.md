@@ -8,7 +8,7 @@ This is a binary exploitation challenge featuring a vulnerable HTTP server with 
 
 ### The Vulnerable Code
 
-In `main2.c`, the `handle_submit()` function contains a classic buffer overflow:
+In `main.c`, the `handle_submit()` function contains a classic buffer overflow:
 
 ```c
 void handle_submit(int client_fd, const char *body) {
