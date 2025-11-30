@@ -1,0 +1,8 @@
+services:
+  enchantement:
+    build: .
+    privileged: true
+    ports:
+      - "6020:6020"
+    environment:
+      JAIL_PORT: 6020

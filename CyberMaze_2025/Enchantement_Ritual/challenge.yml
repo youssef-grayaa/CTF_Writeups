@@ -1,0 +1,23 @@
+name: Enchantement Ritual
+author: grayaa?
+category: Fantasy_Quest_Tavern
+description: |-
+    In every tale whispered across the old kingdoms, the hero’s journey begins the same way.
+    Before facing dragons, shadow beasts, or whatever gonk-spawned horror lurks in forgotten ruins, the hero must seek an enchantment.
+    But the artifact is unstable, its magic imperfect, its runes flawed.
+
+    Those who understand its inner workings can reveal more than just enchanted words.
+    
+    ```nc IP port ``` to get access to your enchanting table.
+
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 20
+    minimum: 100
+flags:
+    - flag: CM{P0w3rFu11_M4g1c_1nd33d}
+      data: case_sensitive
+state: hidden
+version: "0.1"

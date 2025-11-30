@@ -1,0 +1,2 @@
+CM{fake_flag}
+a wild key appears: 
