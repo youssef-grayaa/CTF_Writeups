@@ -1,0 +1,48 @@
+int __fastcall main(int argc, const char **argv, const char **envp)
+{
+  _BYTE v4[128]; // [rsp+0h] [rbp-110h] BYREF
+  char buf[136]; // [rsp+80h] [rbp-90h] BYREF
+  ssize_t v6; // [rsp+108h] [rbp-8h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setup_seccomp();
+  puts("==========================================");
+  puts("         METARED FILM FESTIVAL            ");
+  puts("         WORK SUBMISSION PORTAL           ");
+  puts("==========================================\n");
+  printf("Step 1/2: Title of the Work\n>> Input:");
+  v6 = read(0, buf, 0x7Fu);
+  if ( v6 > 0 )
+    buf[v6] = 0;
+  printf("\n>> You entered:");
+  printf(buf);
+  puts("\n==========================================\n");
+  printf("Step 2/2: Movie Plot Summary\n>> Input:");
+  read(0, v4, 0x400u);
+  puts("\n==========================================\n");
+  puts("Thanks. Request ID #31337 was generated.");
+  puts("Do not close this window while we process your file...");
+  return 0;
+}
+
+__int64 setup_seccomp()
+{
+  __int64 v1; // [rsp+8h] [rbp-8h]
+
+  v1 = seccomp_init(2147418112);
+  if ( !v1 )
+  {
+    perror("seccomp_init");
+    exit(1);
+  }
+  seccomp_rule_add(v1, 0, 59, 0);
+  seccomp_rule_add(v1, 0, 322, 0);
+  if ( (int)seccomp_load(v1) < 0 )
+  {
+    perror("seccomp_load");
+    seccomp_release(v1);
+    exit(1);
+  }
+  return seccomp_release(v1);
+}
+
