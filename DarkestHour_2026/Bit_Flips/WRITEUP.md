@@ -15,9 +15,7 @@ We first run Checksec on the binary as usual to see the mitigations present here
     PIE:        PIE enabled
     RUNPATH:    b'.'
 ```
-```
 
-```
 
 So basically all the mitigations are present.
 
@@ -183,8 +181,7 @@ The offset of `bit_flip` call is `0x13d5` and the offset of `leaks` call is `0x1
 breakrva 0x141d
 breakrva 0x13d5
 ```
-```
-```
+
 
 Now let's take a look at the disassembly of `main` :
 
@@ -207,8 +204,7 @@ After calling `leaks` the next instruction in the main function is `mov eax, 0` 
 06:0030│+010 0x7ffc3f5d6490 —▸ 0x7ffc3f5d6530 —▸ 0x7ffc3f5d6590 ◂— 0
 07:0038│+018 0x7ffc3f5d6498 —▸ 0x7f2fad627635 ◂— mov edi, eax
 ```
-```
-```
+
 
 
 We have a stack variable pointing to the `mov eax, 0` instruction.
@@ -282,9 +278,7 @@ $2 = 101010
 Let's call `mov rbp, rsp`, this can be done by a single bit shift (position 3) on our target.
 
 And it works!
-```
 
-```
 ```
 > $ 0x7fffc04a5af8
 $ 3
