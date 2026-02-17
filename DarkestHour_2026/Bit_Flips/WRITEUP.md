@@ -48,7 +48,7 @@ But it holds a surprise that i will show later.
 
 Let's focus on the leaks function for now
 
-[Leaks Function](images/leaks.png)
+![Leaks Function](images/leaks.png)
 
 
 The `leaks` function is printing the addresses of `main`,`system` a stack variable `v7` and `v3` which is the output of `sbrk(0)`.
@@ -69,7 +69,7 @@ After giving us those leaks. the program goes on a loop which calls the `bit_fli
 
 Let's take a look at this `bit_flip` function
 
-[Bit_Flips Function](images/bitflip.png)
+![Bit_Flips Function](images/bitflip.png)
 
 So this function reads two variables, a v2 variable of type `BYTE` and a v1 variable of type `unsigned int`
 
@@ -111,7 +111,7 @@ Giving us an arbitrary bit_flip on 3 addresses.
 
 Looking more into the functions that are present in the binary i found a `system_func` function.
 
-[system_func Function](images/win.png)
+![system_func Function](images/win.png)
 
 This Function basically reads from a `stream` using `fgets` and calls `system()` on the content of this `stream`.
 
@@ -119,7 +119,7 @@ After seeing the cross references in IDA `shortcut x` we can see that there is a
 
 Remember earlier i mentioned that there is a setup function being called which i ignored at the start i only found out in the middle of the challenge that it contained such a vital piece of information.
 
-[setup Function]
+![setup Function](images/setup.png)
 
 So this function returns a `FILE*` which is read from a `./commands` file and  read into the stream that is used in the `system_func`.
 
@@ -159,7 +159,7 @@ Since the Binary is stripped it will be a pain to set up breakpoints manually. I
 
 After running the program here and debugging here is what we get:
 
-[vmmap](images/vmmap.png)
+![vmmap](images/vmmap.png)
 
 
 We can see that multiple memory regions are targetable. (the ones marked as read and writable).
@@ -185,12 +185,12 @@ breakrva 0x13d5
 
 Now let's take a look at the disassembly of `main` :
 
-[main disassembly](images/main_disass.png)
+![main disassembly](images/main_disass.png)
 
 
 After calling `leaks` the next instruction in the main function is `mov eax, 0` and looking at the stack frame of the `leaks` function we can see it on the stack:
 
-[leak stack](images/leaks_stack.png)
+![leak stack](images/leaks_stack.png)
 
 
 ```
