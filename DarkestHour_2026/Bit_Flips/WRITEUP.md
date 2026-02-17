@@ -55,7 +55,7 @@ The `leaks` function is printing the addresses of `main`,`system` a stack variab
 
 Initially i didn't know that `sbrk(0)` returns.
 
-When you use sbrk(0) you get the current "break" address which is the address that marks the end of the process’s `heap`.
+When you use sbrk(0) you get the current "break" address which is the address that marks the end of the process's `heap`.
 
 so basically the program is leaking the `main` address which will allow us to bypass `PIE` and be able to calculate other program addresses, a `system` leak will allow us to calculate `libc` addresses which can be useful for `ret2libc` attacks, a `stack` leak for whatever is on the stack `rbp` and `rsp` values etc. and finally a `heap` leak.
 
@@ -402,6 +402,4 @@ And it works!
 
 This was a really fun challenge. I spent too long trying to find a solution for it.
 
-It was a reminder to pay attention to some details we often dismiss due to a force of bad habit.
-
-
+It was a reminder to pay attention to some details we often dismiss due to a force of bad habit. 
