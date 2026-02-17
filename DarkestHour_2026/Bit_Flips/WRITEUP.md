@@ -50,7 +50,7 @@ But it holds a surprise that i will show later.
 
 Let's focus on the leaks function for now
 
-[Leaks Function](/images/leaks.png)
+[Leaks Function](images/leaks.png)
 
 
 The `leaks` function is printing the addresses of `main`,`system` a stack variable `v7` and `v3` which is the output of `sbrk(0)`.
@@ -71,7 +71,7 @@ After giving us those leaks. the program goes on a loop which calls the `bit_fli
 
 Let's take a look at this `bit_flip` function
 
-[Bit_Flips Function](/images/bitflip.png)
+[Bit_Flips Function](images/bitflip.png)
 
 So this function reads two variables, a v2 variable of type `BYTE` and a v1 variable of type `unsigned int`
 
@@ -113,7 +113,7 @@ Giving us an arbitrary bit_flip on 3 addresses.
 
 Looking more into the functions that are present in the binary i found a `system_func` function.
 
-[system_func Function](/images/win.png)
+[system_func Function](images/win.png)
 
 This Function basically reads from a `stream` using `fgets` and calls `system()` on the content of this `stream`.
 
@@ -161,7 +161,7 @@ Since the Binary is stripped it will be a pain to set up breakpoints manually. I
 
 After running the program here and debugging here is what we get:
 
-[vmmap](/images/vmmap.png)
+[vmmap](images/vmmap.png)
 
 
 We can see that multiple memory regions are targetable. (the ones marked as read and writable).
@@ -188,12 +188,12 @@ breakrva 0x13d5
 
 Now let's take a look at the disassembly of `main` :
 
-[main disassembly](/images/main_disass.png)
+[main disassembly](images/main_disass.png)
 
 
 After calling `leaks` the next instruction in the main function is `mov eax, 0` and looking at the stack frame of the `leaks` function we can see it on the stack:
 
-[leak stack](/images/leaks_stack.png)
+[leak stack](images/leaks_stack.png)
 
 
 ```
@@ -298,7 +298,7 @@ FLAG{FAKE_FLAG_FOR_TESTING}
 
 However when testing with the remote target things don't go as smooth as we thought.
 
-![Fail](/images/fail.png)
+![Fail](images/fail.png)
 
 Turns out The Remote Target has a useless  `commands` file open there...
 
@@ -309,7 +309,7 @@ I will explain the intended method below :
 Let's look at the disassembly of the `system_func` function:
 
 
-![Stack of Win](/images/win_stack.png)
+![Stack of Win](images/win_stack.png)
 
 We can see that the `fgets` function is loading the FILE* to the commands file in the 3rd argument
 `fgets(s, 24, stream)`
@@ -403,7 +403,7 @@ And we need to do 2 bit flips to turn 3 (011) into 0
 
 And it works!
 
-![GG](/images/gg.png)
+![GG](images/gg.png)
 
 
 This was a really fun challenge. I spent too long trying to find a solution for it.
